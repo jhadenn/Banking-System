@@ -274,6 +274,16 @@ class TransactionHandler:
         # Change the account's payment plan to non-student
         account.account_payment_plan = account.account_payment_plan.NON_STUDENT
 
+        transaction = Transaction(
+            TransactionCode.CHANGEPLAN,
+            account_holder_name,
+            account_number,
+            0.0,
+        )
+        self.session.transactions.append(transaction)
+
+        return transaction
+
     def check_for_admin_privileges(self) -> bool:
         if self.session.kind != "admin":
             print("You must log in as an admin to perform this transaction.")
