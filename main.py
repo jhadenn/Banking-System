@@ -1,4 +1,5 @@
 from session import Session
+from transaction import TransactionHandler
 
 
 def main():
@@ -19,10 +20,14 @@ def main():
             print("You are already logged in. Please log out before logging in again.")
             continue
 
+        transaction_handler = TransactionHandler(session)
+        
         if command == "login":
             session = handle_login()
         elif command == "logout":
             session = handle_logout(session)
+        elif command == "withdrawal":
+            handle_withdrawal(session, transaction_handler)
 
 
 def handle_login():
@@ -35,9 +40,9 @@ def handle_login():
         else:
             break
 
-    # Get the account holder name if the session kind is admin
+    # Get the account holder name if the session kind is standard
     account_holder_name = None
-    if kind == "admin":
+    if kind == "standard":
         while True:
             account_holder_name = input("Enter account holder name: ").strip()
             if not account_holder_name:
@@ -56,6 +61,30 @@ def handle_logout(session: Session):
     # Write the current session's transactions to the file
     session.write_transactions()
     return None
+
+
+def handle_withdrawal(session: Session, transaction_handler: TransactionHandler):
+    """Withdraw money from an account."""
+
+    # Ask for the account holder's name, account number, and amount to withdraw
+    if session.kind == "admin":
+        account_holder_name = input("Enter account holder name: ").strip()
+    else:
+        account_holder_name = session.account_holder_name
+
+    account_number = input("Enter account number: ").strip()
+    if not account_number.isdigit():
+        print("Invalid account number. Please enter a valid account number.")
+        return
+    account_number = int(account_number)
+
+    amount = input("Enter amount to withdraw: ").strip()
+    if not amount.isdigit():
+        print("Invalid amount. Please enter a valid amount.")
+        return
+    amount = int(amount)
+
+    transaction_handler.handle_withdrawal(account_holder_name, account_number, amount)
 
 
 if __name__ == "__main__":
