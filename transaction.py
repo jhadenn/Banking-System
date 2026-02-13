@@ -47,7 +47,9 @@ class TransactionHandler:
                     "Bank account must be a valid account for the account holder currently logged in."
                 )
                 return
-            if amount > 500:
+
+            current_total = self.session.transaction_totals[TransactionCode.WITHDRAWAL]
+            if current_total + amount > 500:
                 print(
                     "Maximum amount that can be withdrawn in current session is $500.00 in standard mode."
                 )
@@ -66,6 +68,8 @@ class TransactionHandler:
             return
 
         account.balance = new_balance
+
+        self.session.transaction_totals[TransactionCode.WITHDRAWAL] += amount
 
         transaction = Transaction(
             TransactionCode.WITHDRAWAL, account_holder_name, account_number, amount
@@ -88,7 +92,9 @@ class TransactionHandler:
                     "Bank account must be a valid account for the account holder currently logged in."
                 )
                 return
-            if amount > 1000:
+
+            current_total = self.session.transaction_totals[TransactionCode.TRANSFER]
+            if current_total + amount > 1000:
                 print(
                     "Maximum amount that can be transferred in current session is $1000.00 in standard mode."
                 )
@@ -116,6 +122,8 @@ class TransactionHandler:
         from_account.balance = from_new_balance
         to_account.balance = to_new_balance
 
+        self.session.transaction_totals[TransactionCode.TRANSFER] += amount
+
         transaction = Transaction(
             TransactionCode.TRANSFER,
             from_account_holder_name,
@@ -136,9 +144,11 @@ class TransactionHandler:
                     "Bank account must be a valid account for the account holder currently logged in."
                 )
                 return
-            if amount > 1000:
+
+            current_total = self.session.transaction_totals[TransactionCode.PAYBILL]
+            if current_total + amount > 2000:
                 print(
-                    "Maximum amount that can be paid in current session is $1000.00 in standard mode."
+                    "Maximum amount that can be paid in current session is $2000.00 in standard mode."
                 )
                 return
 
@@ -155,6 +165,8 @@ class TransactionHandler:
             return
 
         account.balance = new_balance
+
+        self.session.transaction_totals[TransactionCode.PAYBILL] += amount
 
         transaction = Transaction(
             TransactionCode.PAYBILL,

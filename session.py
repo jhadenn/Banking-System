@@ -22,6 +22,13 @@ class Session:
         # Initialize the transactions list for the session
         self.transactions: list[Transaction] = []
 
+        # Store total amounts for each transaction type for the session
+        self.transaction_totals: dict[TransactionCode, float] = {
+            TransactionCode.WITHDRAWAL: 0.0,
+            TransactionCode.TRANSFER: 0.0,
+            TransactionCode.PAYBILL: 0.0,
+        }
+
     def read_accounts(self):
         return read_accounts()
 
