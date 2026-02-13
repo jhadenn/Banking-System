@@ -24,26 +24,33 @@ def main():
 
         if command == "login":
             session = handle_login()
+            continue
         elif command == "logout":
             session = handle_logout(session)
-        elif command == "withdrawal":
-            handle_withdrawal(session, transaction_handler)
+            continue
+
+        transaction = None
+        if command == "withdrawal":
+            transaction = handle_withdrawal(session, transaction_handler)
         elif command == "transfer":
-            handle_transfer(session, transaction_handler)
+            transaction = handle_transfer(session, transaction_handler)
         elif command == "paybill":
-            handle_paybill(session, transaction_handler)
+            transaction = handle_paybill(session, transaction_handler)
         elif command == "deposit":
-            handle_deposit(session, transaction_handler)
+            transaction = handle_deposit(session, transaction_handler)
         elif command == "create":
-            handle_create(session, transaction_handler)
+            transaction = handle_create(session, transaction_handler)
         elif command == "delete":
-            handle_delete(session, transaction_handler)
+            transaction = handle_delete(session, transaction_handler)
         elif command == "disable":
-            handle_disable(session, transaction_handler)
+            transaction = handle_disable(session, transaction_handler)
         elif command == "changeplan":
-            handle_changeplan(session, transaction_handler)
+            transaction = handle_changeplan(session, transaction_handler)
         else:
             print("Invalid command.")
+
+        if transaction is not None:
+            session.transactions.append(transaction)
 
 
 def handle_login():

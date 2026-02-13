@@ -38,7 +38,7 @@ class TransactionHandler:
         self.session = session
 
     def withdrawal(
-        self, account_holder_name: str, account_number: int, amount: int
+        self, account_holder_name: str, account_number: int, amount: float
     ) -> Transaction:
 
         if self.session.kind == "standard":
@@ -71,19 +71,16 @@ class TransactionHandler:
 
         self.session.transaction_totals[TransactionCode.WITHDRAWAL] += amount
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.WITHDRAWAL, account_holder_name, account_number, amount
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
 
     def transfer(
         self,
         from_account_holder_name: str,
         from_account_number: int,
         to_account_number: int,
-        amount: int,
+        amount: float,
     ) -> Transaction:
 
         if self.session.kind == "standard":
@@ -124,19 +121,16 @@ class TransactionHandler:
 
         self.session.transaction_totals[TransactionCode.TRANSFER] += amount
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.TRANSFER,
             from_account_holder_name,
             from_account_number,
             amount,
             to_account_number,
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
 
     def paybill(
-        self, account_holder_name: str, account_number: int, amount: int, company: str
+        self, account_holder_name: str, account_number: int, amount: float, company: str
     ) -> Transaction:
         if self.session.kind == "standard":
             if account_holder_name != self.session.account_holder_name:
@@ -168,19 +162,16 @@ class TransactionHandler:
 
         self.session.transaction_totals[TransactionCode.PAYBILL] += amount
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.PAYBILL,
             account_holder_name,
             account_number,
             amount,
             company,
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
 
     def deposit(
-        self, account_holder_name: str, account_number: int, amount: int
+        self, account_holder_name: str, account_number: int, amount: float
     ) -> Transaction:
         if self.session.kind == "standard":
             if account_holder_name != self.session.account_holder_name:
@@ -202,15 +193,12 @@ class TransactionHandler:
             print("Account balance must be at least $0.00 after deposit.")
             return
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.DEPOSIT,
             account_holder_name,
             account_number,
             amount,
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
 
     def create(self, account_holder_name: str, initial_balance: float) -> Transaction:
         if self.session.kind != "admin":
@@ -230,15 +218,12 @@ class TransactionHandler:
         # Generate a new, unique account number
         account_number = max(self.session.accounts.keys(), default=10000) + 1
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.CREATE,
             account_holder_name,
             account_number,
             initial_balance,
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
 
     def delete(self, account_holder_name: str, account_number: int) -> Transaction:
         if self.session.kind != "admin":
@@ -257,15 +242,12 @@ class TransactionHandler:
         # No further transactions should be accepted on a deleted account
         self.session.accounts.pop(account_number)
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.DELETE,
             account_holder_name,
             account_number,
             0.0,
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
 
     def disable(self, account_holder_name: str, account_number: int) -> Transaction:
         if self.session.kind != "admin":
@@ -284,15 +266,12 @@ class TransactionHandler:
         # No further transactions should be accepted on a disabled account
         account.is_active = False
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.DISABLE,
             account_holder_name,
             account_number,
             0.0,
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
 
     def changeplan(self, account_holder_name: str, account_number: int) -> Transaction:
         if self.session.kind != "admin":
@@ -311,12 +290,9 @@ class TransactionHandler:
         # Change the account's payment plan to non-student
         account.account_payment_plan = account.account_payment_plan.NON_STUDENT
 
-        transaction = Transaction(
+        return Transaction(
             TransactionCode.CHANGEPLAN,
             account_holder_name,
             account_number,
             0.0,
         )
-        self.session.transactions.append(transaction)
-
-        return transaction
