@@ -217,6 +217,16 @@ class TransactionHandler:
             print("You must log in as an admin to perform this transaction.")
             return
 
+        # Validate the account holder's name
+        if len(account_holder_name) > 20:
+            print("Account holder name cannot exceed 20 characters.")
+            return
+
+        # Validate the initial balance
+        if initial_balance > 99999.99:
+            print("Initial balance cannot exceed $99,999.99.")
+            return
+
         # Generate a new, unique account number
         account_number = max(self.session.accounts.keys(), default=10000) + 1
 
