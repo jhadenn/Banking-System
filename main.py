@@ -179,6 +179,11 @@ def handle_deposit(session: Session, transaction_handler: TransactionHandler):
 def handle_create(session: Session, transaction_handler: TransactionHandler):
     """Create a new account."""
 
+    # Ensure only admins can create this transaction
+    if session.kind != "admin":
+        print("You do not have permission to perform this transaction.")
+        return
+
     # Ask for the account holder's name
     account_holder_name = get_text("Enter account holder name: ")
 
@@ -190,6 +195,11 @@ def handle_create(session: Session, transaction_handler: TransactionHandler):
 
 def handle_delete(session: Session, transaction_handler: TransactionHandler):
     """Delete an account."""
+
+    # Ensure only admins can create this transaction
+    if session.kind != "admin":
+        print("You do not have permission to perform this transaction.")
+        return
 
     # Ask for the account holder's name
     account_holder_name = get_text("Enter account holder name: ")
@@ -203,6 +213,11 @@ def handle_delete(session: Session, transaction_handler: TransactionHandler):
 def handle_disable(session: Session, transaction_handler: TransactionHandler):
     """Disable an account."""
 
+    # Ensure only admins can create this transaction
+    if session.kind != "admin":
+        print("You do not have permission to perform this transaction.")
+        return
+
     # Ask for the account holder's name
     account_holder_name = get_text("Enter account holder name: ")
 
@@ -214,6 +229,11 @@ def handle_disable(session: Session, transaction_handler: TransactionHandler):
 
 def handle_changeplan(session: Session, transaction_handler: TransactionHandler):
     """Change the payment plan of an account."""
+
+    # Ensure only admins can create this transaction
+    if session.kind != "admin":
+        print("You do not have permission to perform this transaction.")
+        return
 
     # Ask for the account holder's name
     account_holder_name = get_text("Enter account holder name: ")
