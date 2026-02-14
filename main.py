@@ -98,6 +98,11 @@ def handle_logout(session: Session):
     # Normally, `write_accounts` would only be called by the backend application.
     # However, it's hard to test the frontend without it, so we will call it here
     # for testing purposes.
+    print(
+        "Note: Normally, accounts.txt should only be written by the backend application. "
+        "Since the backend has not been implemented yet, we will write to accounts.txt to "
+        "show changes and make the program easier to test. "
+    )
     write_accounts(session.accounts)
     return None
 
