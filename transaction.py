@@ -89,6 +89,7 @@ class TransactionHandler:
 
         # Update the account balance after withdrawal
         account.balance = new_balance
+        print("Withdrawal successful.")
 
         # Update the total amount withdrawn for the session
         self.session.transaction_totals[TransactionCode.WITHDRAWAL] += amount
@@ -155,6 +156,7 @@ class TransactionHandler:
         # Update the account balances after transfer
         from_account.balance = from_new_balance
         to_account.balance = to_new_balance
+        print("Transfer successful.")
 
         # Update the total amount transferred for the session
         self.session.transaction_totals[TransactionCode.TRANSFER] += amount
@@ -209,6 +211,7 @@ class TransactionHandler:
 
         # Update the account balance after payment
         account.balance = new_balance
+        print("Pay bill successful.")
 
         # Update the total amount paid for the session
         self.session.transaction_totals[TransactionCode.PAYBILL] += amount
@@ -251,6 +254,7 @@ class TransactionHandler:
         # But since we have not implemented the backend application, we will allow
         # deposited funds to be available testing purposes.
         new_balance = account.balance + amount
+        print("Deposit successful.")
 
         if new_balance < 0:
             print("Account balance must be at least $0.00 after deposit.")
@@ -291,6 +295,8 @@ class TransactionHandler:
             is_new=True,
         )
 
+        print("Account created. Account number is", account_number)
+
         return Transaction(
             TransactionCode.CREATE,
             account_holder_name,
@@ -317,6 +323,7 @@ class TransactionHandler:
 
         # No further transactions should be accepted on a deleted account
         self.session.accounts.pop(account_number)
+        print("Account deleted.")
 
         return Transaction(
             TransactionCode.DELETE,
@@ -344,6 +351,7 @@ class TransactionHandler:
 
         # No further transactions should be accepted on a disabled account
         account.is_active = False
+        print("Account disabled.")
 
         return Transaction(
             TransactionCode.DISABLE,
@@ -371,6 +379,7 @@ class TransactionHandler:
 
         # Change the account's payment plan to non-student
         account.account_payment_plan = account.account_payment_plan.NON_STUDENT
+        print("Plan changed.")
 
         return Transaction(
             TransactionCode.CHANGEPLAN,
