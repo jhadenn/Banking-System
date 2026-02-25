@@ -1,0 +1,8 @@
+login
+standard
+Bob
+transfer
+10002
+10001
+200
+logout

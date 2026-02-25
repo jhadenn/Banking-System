@@ -1,0 +1,8 @@
+Banking System
+> login
+Enter session kind (admin/standard): admin
+> delete
+Enter account holder name: Nonexistent
+Enter account number: 99999
+Account number must be a valid account.
+> logout

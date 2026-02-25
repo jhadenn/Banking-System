@@ -1,0 +1,10 @@
+login
+standard
+Bob
+withdrawal
+10002
+200
+withdrawal
+10002
+400
+logout

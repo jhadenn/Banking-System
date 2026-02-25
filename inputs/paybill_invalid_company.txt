@@ -1,0 +1,8 @@
+login
+standard
+Bob
+paybill
+10002
+XX
+100
+logout

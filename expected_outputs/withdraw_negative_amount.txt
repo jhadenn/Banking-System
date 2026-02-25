@@ -1,0 +1,9 @@
+Banking System
+> login
+Enter session kind (admin/standard): standard
+Enter account holder name: Bob
+> withdrawal
+Enter account number: 10002
+Enter amount to withdraw: -50
+Cannot withdraw negative amount.
+> logout

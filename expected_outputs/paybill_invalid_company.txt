@@ -1,0 +1,9 @@
+Banking System
+> login 
+Enter session kind (admin/standard): standard
+Enter account holder name: Bob
+> paybill
+Enter account number: 10002
+Enter company name: XX
+Invalid company name.
+> logout 

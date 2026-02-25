@@ -87,6 +87,11 @@ class TransactionHandler:
             print("Account balance must be at least $0.00 after withdrawal.")
             return
 
+        # Ensure withdrawal amount isn't negative
+        if amount < 0:
+            print("Cannot withdraw negative amount.")
+            return
+
         # Update the account balance after withdrawal
         account.balance = new_balance
         print("Withdrawal successful.")

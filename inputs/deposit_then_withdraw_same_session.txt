@@ -1,0 +1,10 @@
+login
+standard
+Bob
+deposit
+10002
+300
+withdrawal
+10002
+250
+logout
