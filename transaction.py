@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import TYPE_CHECKING
-from account import write_accounts, Account
+
+from account import Account
 
 if TYPE_CHECKING:
     from session import Session
@@ -40,7 +41,10 @@ class Transaction:
 
 
 class TransactionHandler:
+    """Handles transactions performed in the banking system, ensuring that they are valid based on the session kind and account details."""
+
     def __init__(self, session: "Session"):
+        """Create a new transaction handler for the given session."""
         self.session = session
 
     def withdrawal(
@@ -70,6 +74,11 @@ class TransactionHandler:
             print(
                 "Bank account must be a valid account for the account holder currently logged in."
             )
+            return
+
+        # Ensure that the account is active and available for use
+        if not account.available_for_use:
+            print("Bank account must be active and available for use.")
             return
 
         # Ensure that the account balance is sufficient to cover the withdrawal
@@ -122,6 +131,15 @@ class TransactionHandler:
         to_account = self.session.accounts.get(to_account_number)
         if to_account is None:
             print("Destination account number must be a valid account.")
+            return
+
+        # Ensure that both accounts are active and available for use
+        if not from_account.available_for_use:
+            print("From account must be active and available for use.")
+            return
+
+        if not to_account.available_for_use:
+            print("Destination account must be active and available for use.")
             return
 
         # Ensure that the account balance of the from account is sufficient to cover the transfer
@@ -178,6 +196,11 @@ class TransactionHandler:
             )
             return
 
+        # Ensure that the account is active and available for use
+        if not account.available_for_use:
+            print("Bank account must be active and available for use.")
+            return
+
         # Ensure that the account balance is sufficient to cover the bill payment
         new_balance = account.balance - amount
         if new_balance < 0:
@@ -219,8 +242,16 @@ class TransactionHandler:
             )
             return
 
-        # Deposited funds should not be available for use in this session
+        # Ensure that the account is active and available for use
+        if not account.available_for_use:
+            print("Bank account must be active and available for use.")
+            return
+
+        # Normally, deposited funds should not be available for use in this session
+        # But since we have not implemented the backend application, we will allow
+        # deposited funds to be available testing purposes.
         new_balance = account.balance + amount
+
         if new_balance < 0:
             print("Account balance must be at least $0.00 after deposit.")
             return
@@ -252,16 +283,13 @@ class TransactionHandler:
         # Generate a new, unique account number
         account_number = max(self.session.accounts.keys(), default=10000) + 1
 
-        new_account = Account(
+        # Add the new account to the session's accounts
+        self.session.accounts[account_number] = Account(
             account_holder_name,
             account_number,
             initial_balance,
-            True,
+            is_new=True,
         )
-
-        self.session.accounts[account_number] = new_account
-        write_accounts(self.session.accounts)
-
 
         return Transaction(
             TransactionCode.CREATE,

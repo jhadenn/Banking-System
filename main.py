@@ -4,6 +4,9 @@ on standard input, handles them, and produces responses on standard output. At t
 session, the master list of accounts is loaded from "accounts.txt". At the end of a session, the
 transactions for that session are written to "transactions.txt" in the format specified in the project
 description.
+
+To run this module, run `python main.py` in the terminal.
+You can then enter commands to perform transactions.
 """
 
 from session import Session
@@ -88,9 +91,18 @@ def handle_login() -> Session:
 
 
 def handle_logout(session: Session):
-    """Log out of the current session and write the account changes and transactions to their respective files."""
+    """Log out of the current session and write the transactions to the file."""
     # Write the current session's transactions to the file
     session.write_transactions()
+
+    # Normally, `write_accounts` would only be called by the backend application.
+    # However, it's hard to test the frontend without it, so we will call it here
+    # for testing purposes.
+    print(
+        "Note: Normally, accounts.txt should only be written by the backend application. "
+        "Since the backend has not been implemented yet, we will write to accounts.txt to "
+        "show changes and make the program easier to test. "
+    )
     write_accounts(session.accounts)
     return None
 

@@ -26,7 +26,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="bank.png" alt="Banking System Logo" width="200" height="200">
+    <img width="200" height="200" alt="bank" src="https://github.com/user-attachments/assets/bee9c564-3d1e-482e-9bda-632506d09c7c" />
   </a>
 </div>
 
@@ -81,7 +81,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="bank.png" alt="Screenshot of project" width="200" height="200">
+<img width="200" height="200" alt="bank" src="https://github.com/user-attachments/assets/bee9c564-3d1e-482e-9bda-632506d09c7c" />
 
 The Banking System is a modular command-line application that simulates core banking operations including withdrawals, deposits, transfers, bill payments, and administrative account management.
 The system enforces strict banking rules, session controls, and privilege levels while serializing transactions for backend processing.
@@ -104,7 +104,7 @@ Key Features:
 
 ## Architecture
 
-<img src="system_architecture1.png" alt="System architecture">
+<img width="1706" height="900" alt="mermaid-diagram-2026-02-13-015709" src="https://github.com/user-attachments/assets/19192f01-1a31-4f41-8f77-5b5c1f31bd81" />
 
 ## Getting Started
 
@@ -128,20 +128,19 @@ To get a local copy up and running follow these steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1. Start the program
+1. Start the program (main.py)
 
-2. Log in as either:
-    * Standard user
-    * Admin user
+2. Enter "login" when prompted as either a "standard" or "admin" account. If testing in standard, use the information below from an existing account.
 
-3. Perform supported transactions:
-    * Withdraw
-    * Deposit
-    * Transfer
-    * Pay bill
-    * Create/Delete/Disable account (Admin only)
+3. Enter Account holder name. Example: "Bob"
 
-4. Logout to finalize the session
+4. Enter the action you would like to perfrom: "withdrawal", "transfer", "paybill", "deposit", "create", "delete", "disable", "changeplan"
+
+5. Enter account number in valid format. Example:10002 
+
+6. Logout to finalize the session
+
+7. Login in as "admin" to test creating and deleting accounts.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
