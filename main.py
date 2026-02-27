@@ -8,7 +8,7 @@ description.
 To run this module, run `python main.py` in the terminal.
 You can then enter commands to perform transactions.
 """
-
+import sys
 from session import Session
 from transaction import TransactionHandler
 from account import write_accounts
@@ -17,11 +17,25 @@ from account import write_accounts
 def main():
     """Handle user input and perform transactions."""
 
+    # Frontend must accept filenames as command line arguments, but since the backend has not been implemented yet, we will ignore the accounts file argument and write to accounts.txt directly in the logout handler. This is just for testing purposes to show changes to accounts.txt and make the program easier to test.
+    if len(sys.argv) != 3:
+        print("Usage: python main.py <accounts_file> <transaction_output_file>")
+        sys.exit(1)
+
+    accounts_file = sys.argv[1]
+    transaction_output_file = sys.argv[2]
+
     session = None
 
     print("Banking System")
     while True:
-        command = input("> ").strip()
+        try:
+            command = input("> ").strip()
+        except EOFError:
+            # Allow stdin-driven tests to end cleanly
+            if session is not None:
+                session.write_transactions()
+            break
 
         # No transaction other than login should be accepted if there is no active session
         if session is None and command != "login":
@@ -37,7 +51,7 @@ def main():
 
         # Handle login and logout separately since they don't produce transactions
         if command == "login":
-            session = handle_login()
+            session = handle_login(accounts_file, transaction_output_file)
             continue
         elif command == "logout":
             session = handle_logout(session)
@@ -68,7 +82,7 @@ def main():
             session.transactions.append(transaction)
 
 
-def handle_login() -> Session:
+def handle_login(accounts_file: str, transaction_output_file: str) -> Session:
     """Prompt the user for input to log in and create a new session."""
     # Get the session kind from the user
     while True:
@@ -85,7 +99,7 @@ def handle_login() -> Session:
         account_holder_name = get_text("Enter account holder name: ")
 
     # Create a new session
-    session = Session(kind, account_holder_name)
+    session = Session(kind, account_holder_name, accounts_file, transaction_output_file)
 
     return session
 
@@ -103,7 +117,7 @@ def handle_logout(session: Session):
         "Since the backend has not been implemented yet, we will write to accounts.txt to "
         "show changes and make the program easier to test. "
     )
-    write_accounts(session.accounts)
+    write_accounts(session.accounts, session.accounts_file)
     return None
 
 

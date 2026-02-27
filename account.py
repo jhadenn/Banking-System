@@ -35,11 +35,10 @@ class Account:
         return self.is_active and not self.is_new
 
 
-def read_accounts() -> dict[int, Account]:
+def read_accounts(filename: str = "accounts.txt") -> dict[int, Account]:
     """Load the accounts from the accounts.txt file and return a dictionary mapping account numbers to Account objects."""
     accounts = dict()
 
-    filename = "accounts.txt"
     if not Path(filename).exists():
         return accounts
 
@@ -67,13 +66,12 @@ def read_accounts() -> dict[int, Account]:
     return accounts
 
 
-def write_accounts(accounts: dict[int, Account]):
+def write_accounts(accounts: dict[int, Account], filename: str = "accounts.txt"):
     """
     Write to the accounts.txt file and store a dictionary mapping account values to `Account` objects.
 
     NOTE: This is just for reference as accounts.txt should only be written by the backend application.
     """
-    filename = "accounts.txt"
     with open(filename, "w") as f:
         for account in accounts.values():
             status = "A" if account.is_active else "D"
