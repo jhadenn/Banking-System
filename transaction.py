@@ -259,6 +259,7 @@ class TransactionHandler:
         # But since we have not implemented the backend application, we will allow
         # deposited funds to be available testing purposes.
         new_balance = account.balance + amount
+        account.balance = new_balance
         print("Deposit successful.")
 
         if new_balance < 0:
