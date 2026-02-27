@@ -218,3 +218,6 @@ __marimo__/
 # Application data
 transactions.txt
 accounts.txt
+
+outputs/*
+!outputs/.gitkeep
