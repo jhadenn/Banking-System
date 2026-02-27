@@ -128,7 +128,11 @@ To get a local copy up and running follow these steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1. Start the program (main.py)
+1. Start the program 
+```sh
+  python main.py <accounts_file> <transaction_output_file>
+```
+
 
 2. Enter "login" when prompted as either a "standard" or "admin" account. If testing in standard, use the information below from an existing account.
 
@@ -154,6 +158,16 @@ This will:
 - Execute all test input files
 - Compare outputs against expected baselines
 - Generate a test_summary.log with pass/fail results
+
+```sh
+   chmod +x check_outputs.sh
+    ./check_outputs.sh 
+```
+
+This will: 
+- Diffs outputs/ against expected_outputs and prints PASS/FAIL
+- On a failure, a diff file is generated: outputs/(testname)diff
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
