@@ -5,10 +5,10 @@ Enter account holder name:
 > 
 Enter account number: 
 Enter amount to withdraw: 
-Account balance must be at least $0.00 after withdrawal.
+Withdrawal successful.
 > 
 Enter account number: 
 Enter amount to withdraw: 
-Account balance must be at least $0.00 after withdrawal.
+Maximum amount that can be withdrawn in current session is $500.00 in standard mode.
 > 
 > 

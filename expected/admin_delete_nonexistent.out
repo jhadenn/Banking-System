@@ -2,8 +2,6 @@ Banking System
 > 
 Enter session kind (admin/standard): 
 > 
-Invalid command.
-> 
 Enter account holder name: 
 Enter account number: 
 Account number must be a valid account.

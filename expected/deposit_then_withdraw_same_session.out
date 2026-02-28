@@ -5,10 +5,10 @@ Enter account holder name:
 > 
 Enter account number: 
 Enter amount to deposit: 
-Deposit successful.
+Deposited funds will be available for use in the next session.
 > 
 Enter account number: 
 Enter amount to withdraw: 
-Withdrawal successful.
+Account balance must be at least $0.00 after withdrawal.
 > 
 > 

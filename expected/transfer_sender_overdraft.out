@@ -6,6 +6,6 @@ Enter account holder name:
 Enter account number to transfer from: 
 Enter account number to transfer to: 
 Enter amount to transfer: 
-Account balance of both accounts must be at least $0.00 after transfer
+Maximum amount that can be transferred in current session is $1000.00 in standard mode.
 > 
 > 

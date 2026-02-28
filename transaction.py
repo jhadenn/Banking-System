@@ -255,16 +255,8 @@ class TransactionHandler:
             print("Bank account must be active and available for use.")
             return
 
-        # Normally, deposited funds should not be available for use in this session
-        # But since we have not implemented the backend application, we will allow
-        # deposited funds to be available testing purposes.
-        new_balance = account.balance + amount
-        account.balance = new_balance
-        print("Deposit successful.")
-
-        if new_balance < 0:
-            print("Account balance must be at least $0.00 after deposit.")
-            return
+        # Deposited funds should not be available for use in the current session
+        print("Deposited funds will be available for use in the next session.")
 
         return Transaction(
             TransactionCode.DEPOSIT,
