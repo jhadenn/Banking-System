@@ -4,8 +4,8 @@ set -euo pipefail
 
 EXPECTED_DIR="expected"
 
+# Find all input files matching the pattern inputs/*.txt
 shopt -s nullglob
-# Paths to input files
 inputs=(inputs/*.txt)
 
 echo "Starting output validation..."

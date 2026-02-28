@@ -5,8 +5,8 @@ set -euo pipefail
 ACCOUNTS_FILE="accounts.txt"
 mkdir -p outputs
 
+# Find all input files matching the pattern inputs/*.txt
 shopt -s nullglob
-# Paths to input files
 inputs=(inputs/*.txt)
 
 echo "Starting test execution..."
