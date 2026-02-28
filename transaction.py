@@ -88,8 +88,8 @@ class TransactionHandler:
             return
 
         # Ensure withdrawal amount isn't negative
-        if amount < 0:
-            print("Cannot withdraw negative amount.")
+        if amount <= 0:
+            print("Cannot withdraw negative or zero amount.")
             return
 
         # Update the account balance after withdrawal
@@ -146,6 +146,11 @@ class TransactionHandler:
 
         if not to_account.available_for_use:
             print("Destination account must be active and available for use.")
+            return
+        
+        # Ensure transfer amount isn't negative
+        if amount <= 0:
+            print("Cannot transfer negative or zero amount.")
             return
 
         # Ensure that the account balance of the from account is sufficient to cover the transfer
@@ -207,6 +212,11 @@ class TransactionHandler:
         if not account.available_for_use:
             print("Bank account must be active and available for use.")
             return
+        
+        # Ensure bill payment amount isn't negative
+        if amount <= 0:
+            print("Cannot pay bill with negative or zero amount.")
+            return
 
         # Ensure that the account balance is sufficient to cover the bill payment
         new_balance = account.balance - amount
@@ -253,6 +263,11 @@ class TransactionHandler:
         # Ensure that the account is active and available for use
         if not account.available_for_use:
             print("Bank account must be active and available for use.")
+            return
+
+        # Prevent negative or zero deposits
+        if amount <= 0:
+            print("Cannot deposit negative or zero amount.")
             return
 
         # Deposited funds should not be available for use in the current session
