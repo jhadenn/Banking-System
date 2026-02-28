@@ -5,11 +5,12 @@ session, the master list of accounts is loaded from "accounts.txt". At the end o
 transactions for that session are written to "transactions.txt" in the format specified in the project
 description.
 
-To run this module, run `python main.py` in the terminal.
+To run this module, run `python main.py accounts.txt transactions.txt` in the terminal.
 You can then enter commands to perform transactions.
 """
 
 import sys
+from pathlib import Path
 from session import Session
 from transaction import TransactionHandler
 
@@ -24,6 +25,10 @@ def main():
 
     accounts_file = sys.argv[1]
     transaction_output_file = sys.argv[2]
+
+    if not Path(accounts_file).is_file():
+        print(f"Accounts file '{accounts_file}' does not exist.")
+        sys.exit(1)
 
     session = None
 

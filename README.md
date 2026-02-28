@@ -76,8 +76,6 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -117,73 +115,40 @@ To get a local copy up and running follow these steps.
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/Aranno808/CSCI-3060-Assignment
-   ```
+```sh
+git clone https://github.com/Aranno808/CSCI-3060-Assignment
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-1. Start the program 
+To start the program, run:
 ```sh
-  python main.py <accounts_file> <transaction_output_file>
+python main.py <accounts_file> <transaction_output_file>
 ```
-
-
-2. Enter "login" when prompted as either a "standard" or "admin" account. If testing in standard, use the information below from an existing account.
-
-3. Enter Account holder name. Example: "Bob"
-
-4. Enter the action you would like to perfrom: "withdrawal", "transfer", "paybill", "deposit", "create", "delete", "disable", "changeplan"
-
-5. Enter account number in valid format. Example:10002 
-
-6. Logout to finalize the session
-
-7. Login in as "admin" to test creating and deleting accounts.
-
+For example, you can run:
+```sh
+python main.py accounts.txt transactions.txt
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Running Automated Tests
 ```sh
-   chmod +x run_tests.sh
-    ./run_tests.sh 
+chmod +x run_tests.sh
+./run_tests.sh 
 ```
 This will: 
-- Execute all test input files
-- Compare outputs against expected baselines
-- Generate a test_summary.log with pass/fail results
+- Execute all the test cases in the `inputs` directory
+- Create outputs in the `outputs` directory
 
 ```sh
-   chmod +x check_outputs.sh
-    ./check_outputs.sh 
+chmod +x check_tests.sh
+./check_tests.sh 
 ```
-
 This will: 
-- Diffs outputs/ against expected_outputs and prints PASS/FAIL
-- On a failure, a diff file is generated: outputs/(testname)diff
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [X] Team Formation
-- [X] Front End Requirements
-- [X] Front End Rapid Prototyping
-- [] Front End Requirements Testing
-- [] Back End Rapid Prototyping
-- [] Back End Unit Testing
-- [] Integration and Delivery
-
-See the [open issues](https://github.com/Aranno808/CSCI-3060-Assignment/issues) for a full list of proposed features (and known issues).
+- Diffs outputs against expected_outputs and prints the test result (PASS / FAIL)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
