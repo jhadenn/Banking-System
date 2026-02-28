@@ -1,8 +1,0 @@
-Banking System
-> login
-Enter session kind (admin/standard): admin
-> create
-Enter account holder name: abcdefghijklmnopqrstuvwxyz
-Enter initial balance: 10
-Account holder name cannot exceed 20 characters.
-> logout 
