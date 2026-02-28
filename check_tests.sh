@@ -5,14 +5,16 @@ set -euo pipefail
 EXPECTED_DIR="expected"
 
 shopt -s nullglob
+# Paths to input files
 inputs=(inputs/*.txt)
 
 echo "Starting output validation..."
 
+# Iterate over each input file...
 for infile in "${inputs[@]}"; do
   base=$(basename "$infile" .txt)
   echo "-----------------------------------"
-  echo "Checking Test: $base"
+  echo "Checking test: $base"
 
   # Validate transactions (.atf vs .etf)
   if diff "outputs/${base}.atf" "$EXPECTED_DIR/${base}.etf" > /dev/null; then

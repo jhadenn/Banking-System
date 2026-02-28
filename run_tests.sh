@@ -6,10 +6,12 @@ ACCOUNTS_FILE="accounts.txt"
 mkdir -p outputs
 
 shopt -s nullglob
+# Paths to input files
 inputs=(inputs/*.txt)
 
 echo "Starting test execution..."
 
+# Iterate over each input file...
 for infile in "${inputs[@]}"; do
   base=$(basename "$infile" .txt)
   echo "-----------------------------------"
