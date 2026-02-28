@@ -147,7 +147,7 @@ class TransactionHandler:
         if not to_account.available_for_use:
             print("Destination account must be active and available for use.")
             return
-        
+
         # Ensure transfer amount isn't negative
         if amount <= 0:
             print("Cannot transfer negative or zero amount.")
@@ -212,7 +212,7 @@ class TransactionHandler:
         if not account.available_for_use:
             print("Bank account must be active and available for use.")
             return
-        
+
         # Ensure bill payment amount isn't negative
         if amount <= 0:
             print("Cannot pay bill with negative or zero amount.")

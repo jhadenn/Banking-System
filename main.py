@@ -8,6 +8,7 @@ description.
 To run this module, run `python main.py` in the terminal.
 You can then enter commands to perform transactions.
 """
+
 import sys
 from session import Session
 from transaction import TransactionHandler
@@ -292,7 +293,7 @@ def get_float(prompt: str) -> float:
 
 
 def _print_newline_if_not_tty():
-    """Helper function to print a newline if the input is not from a terminal 
+    """Helper function to print a newline if the input is not from a terminal
     (e.g. during testing with stdin). This helps make the output more readable during testing."""
     if not sys.stdin.isatty():
         print()

@@ -5,12 +5,13 @@ from transaction import Transaction, TransactionCode
 class Session:
     """Represents a user session, which can be either an admin session or a standard session for a specific account holder."""
 
-    def __init__(self,
-                 kind: str,
-                 account_holder_name: str | None = None,
-                 accounts_file:str = "accounts.txt",
-                 transaction_output_file: str = "transactions.txt"
-                 ):
+    def __init__(
+        self,
+        kind: str,
+        account_holder_name: str | None = None,
+        accounts_file: str = "accounts.txt",
+        transaction_output_file: str = "transactions.txt",
+    ):
         """Create a new session with the given kind and account holder name (if applicable)."""
 
         # Validate the session details
