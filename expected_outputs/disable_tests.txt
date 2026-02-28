@@ -1,0 +1,17 @@
+Banking Session
+> login
+Enter session kind (admin/standard): admin
+> disable
+Enter account holder name: Carol
+Enter account number: 10010
+Account number must be a valid account.
+> disable
+Enter account holder name: Mark
+Enter account number: 10008
+Account disabled.
+> withdrawal
+Enter account holder name: Mark
+Enter account number: 10008
+Enter amount to withdraw: 10
+Bank account must be active and available for use.
+> logout

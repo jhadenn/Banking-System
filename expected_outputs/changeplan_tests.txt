@@ -1,0 +1,12 @@
+Banking Session
+> login
+Enter session kind (admin/standard): admin
+> changeplan
+Enter account holder name: Nonexistent
+Enter account number: 99999
+Account number must be a valid account.
+> changeplan
+Enter account holder name: Daisy
+Enter account number: 10011
+Plan changed.
+> logout

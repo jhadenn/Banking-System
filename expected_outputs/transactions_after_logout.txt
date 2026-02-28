@@ -1,0 +1,7 @@
+Banking Session
+> login   
+Enter session kind (admin/standard): standard
+Enter account holder name: Bob
+> logout
+> withdrawal
+Please log in to perform transactions.

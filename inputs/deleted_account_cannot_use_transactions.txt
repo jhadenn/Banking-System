@@ -1,0 +1,10 @@
+login
+admin
+delete
+Carol
+10010
+withdrawal
+Carol
+10010
+10
+logout

@@ -1,0 +1,10 @@
+login
+admin
+create
+David
+800
+withdrawal
+David
+10009
+700
+logout

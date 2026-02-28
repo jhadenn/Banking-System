@@ -1,0 +1,6 @@
+login
+admin
+create
+David
+100000
+logout

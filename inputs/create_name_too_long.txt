@@ -1,0 +1,6 @@
+login
+admin
+create
+abcdefghijklmnopqrstuvwxyz
+10
+logout 
