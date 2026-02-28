@@ -11,7 +11,6 @@ You can then enter commands to perform transactions.
 import sys
 from session import Session
 from transaction import TransactionHandler
-from account import write_accounts
 
 
 def main():
@@ -106,18 +105,7 @@ def handle_login(accounts_file: str, transaction_output_file: str) -> Session:
 
 def handle_logout(session: Session):
     """Log out of the current session and write the transactions to the file."""
-    # Write the current session's transactions to the file
     session.write_transactions()
-
-    # Normally, `write_accounts` would only be called by the backend application.
-    # However, it's hard to test the frontend without it, so we will call it here
-    # for testing purposes.
-    print(
-        "Note: Normally, accounts.txt should only be written by the backend application. "
-        "Since the backend has not been implemented yet, we will write to accounts.txt to "
-        "show changes and make the program easier to test. "
-    )
-    write_accounts(session.accounts, session.accounts_file)
     return None
 
 
