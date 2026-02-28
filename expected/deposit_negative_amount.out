@@ -4,7 +4,7 @@ Enter session kind (admin/standard):
 Enter account holder name: 
 > 
 Enter account number: 
-Enter amount to withdraw: 
-Cannot withdraw negative or zero amount.
+Enter amount to deposit: 
+Cannot deposit negative or zero amount.
 > 
 > 

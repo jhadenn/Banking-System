@@ -4,7 +4,8 @@ Enter session kind (admin/standard):
 Enter account holder name: 
 > 
 Enter account number: 
-Enter amount to withdraw: 
-Cannot withdraw negative or zero amount.
+Enter company name: 
+Enter amount to pay: 
+Cannot pay bill with negative or zero amount.
 > 
 > 
