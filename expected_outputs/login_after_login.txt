@@ -1,0 +1,7 @@
+Banking System
+> login
+Enter session kind (admin/standard): standard
+Enter account holder name: Bob
+> login
+You are already logged in. Please log out before logging in again.
+> logout

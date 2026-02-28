@@ -1,0 +1,8 @@
+login
+standard
+Bob
+create
+disable
+delete
+changeplan
+logout

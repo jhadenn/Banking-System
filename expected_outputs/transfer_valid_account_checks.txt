@@ -1,0 +1,15 @@
+Banking Session
+> login
+Enter session kind (admin/standard): standard
+Enter account holder name: Daisy
+> transfer
+Enter account number to transfer from: 10011
+Enter account number to transfer to: 99999
+Enter amount to transfer: 10
+Destination account number must be a valid account.
+> transfer
+Enter account number to transfer from: 10020
+Enter account number to transfer to: 10010
+Enter amount to transfer: 10
+From account number must be a valid account.
+> logout

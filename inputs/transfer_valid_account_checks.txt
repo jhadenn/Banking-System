@@ -1,0 +1,12 @@
+login
+standard
+Daisy
+transfer
+10011
+99999
+10
+transfer
+10020
+10010
+10
+logout
