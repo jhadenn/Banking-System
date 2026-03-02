@@ -18,7 +18,7 @@ for infile in "${inputs[@]}"; do
   echo "Running test: $base"
 
   # Run program and capture both the .atf transaction file and the .out terminal log
-  python main.py "$ACCOUNTS_FILE" "outputs/${base}.atf" < "$infile" > "outputs/${base}.out"
+  python3 main.py "$ACCOUNTS_FILE" "outputs/${base}.atf" < "$infile" > "outputs/${base}.out"
   
   echo "  [DONE] Generated outputs/${base}.atf and outputs/${base}.out"
 done

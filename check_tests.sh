@@ -17,14 +17,14 @@ for infile in "${inputs[@]}"; do
   echo "Checking test: $base"
 
   # Validate transactions (.atf vs .etf)
-  if diff "outputs/${base}.atf" "$EXPECTED_DIR/${base}.etf" > /dev/null; then
+  if diff --strip-trailing-cr "outputs/${base}.atf" "$EXPECTED_DIR/${base}.etf" > /dev/null; then
     echo "  [PASS] Transactions match."
   else
     echo "  [FAIL] Transactions differ!"
   fi
 
   # Validate terminal log (.out vs .out)
-  if diff "outputs/${base}.out" "$EXPECTED_DIR/${base}.out" > /dev/null; then
+  if diff --strip-trailing-cr "outputs/${base}.out" "$EXPECTED_DIR/${base}.out" > /dev/null; then
     echo "  [PASS] Terminal output matches."
   else
     echo "  [FAIL] Terminal output differs!"
