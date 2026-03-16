@@ -1,3 +1,6 @@
+from print_error import log_constraint_error
+
+
 def write_new_current_accounts(accounts, file_path):
     """
     Writes Current Bank Accounts File with strict validation
@@ -71,6 +74,82 @@ def write_new_master_accounts(accounts, file_path):
 
     with open(file_path, "w") as f:
         for account in accounts:
+            # Validate the account number
+            if (
+                not isinstance(account["account_number"], str)
+                or not account["account_number"].isdigit()
+            ):
+                log_constraint_error(
+                    f"Account number must be a numeric string, got {account['account_number']}",
+                    file_path,
+                    fatal=True,
+                )
+            if len(account["account_number"]) > 5:
+                log_constraint_error(
+                    f"Account number must be exactly 5 digits, got {account['account_number']}",
+                    file_path,
+                    fatal=True,
+                )
+
+            # Validate the name
+            if not isinstance(account["name"], str):
+                log_constraint_error(
+                    f"Account name must be a string, got {type(account['name'])}",
+                    file_path,
+                    fatal=True,
+                )
+            if len(account["name"]) > 20:
+                log_constraint_error(
+                    f"Account name must be at most 20 characters, got {account['name']}",
+                    file_path,
+                    fatal=True,
+                )
+
+            # Validate the status
+            if account["status"] not in ("A", "D"):
+                log_constraint_error(
+                    f"Invalid status '{account['status']}'. Must be 'A' or 'D'",
+                    file_path,
+                    fatal=True,
+                )
+
+            # Validate the balance
+            if not isinstance(account["balance"], (int, float)):
+                log_constraint_error(
+                    f"Balance must be numeric, got {type(account['balance'])}",
+                    file_path,
+                    fatal=True,
+                )
+            if account["balance"] < 0:
+                log_constraint_error(
+                    f"Negative balance detected: {account['balance']}",
+                    file_path,
+                    fatal=True,
+                )
+            if account["balance"] > 99999.99:
+                log_constraint_error(
+                    f"Balance exceeds maximum $99999.99: {account['balance']}",
+                    file_path,
+                    fatal=True,
+                )
+
+            # Validate the total transactions
+            if (
+                not isinstance(account["total_transactions"], int)
+                or account["total_transactions"] < 0
+            ):
+                log_constraint_error(
+                    f"Total transactions must be a non-negative integer, got {account['total_transactions']}",
+                    file_path,
+                    fatal=True,
+                )
+            if account["total_transactions"] > 9999:
+                log_constraint_error(
+                    f"Total transactions exceeds maximum 9999: {account['total_transactions']}",
+                    file_path,
+                    fatal=True,
+                )
+
             line = (
                 f"{account['account_number'].zfill(5)} "
                 f"{account['name'].ljust(20)} "
