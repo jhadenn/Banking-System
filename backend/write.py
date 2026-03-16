@@ -52,3 +52,13 @@ def write_new_current_accounts(accounts, file_path):
 
         # Add END_OF_FILE marker
         file.write("00000 END_OF_FILE          A 00000.00 NP\n")
+
+
+def write_new_master_accounts(accounts, file_path):
+    """
+    Writes Master Bank Accounts File with strict validation
+    Format: NNNNN AAAAAAAAAAAAAAAAAAAA S PPPPPPPP TT
+    Where TT is account plan (SP or NP)
+    """
+    # TODO:
+    write_new_current_accounts(accounts, file_path)

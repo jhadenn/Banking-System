@@ -22,12 +22,12 @@ def read_old_bank_accounts(file_path):
 
             try:
                 # Extract fields with positional validation
-                account_number = clean_line[0:4]
-                name = clean_line[6:25]  # 20 characters
+                account_number = clean_line[0:5]
+                name = clean_line[6:26].strip()
                 status = clean_line[27]
-                balance_str = clean_line[29:37]  # 8 characters
-                transactions_str = clean_line[38:42]  # 4 characters
-                plan_type = clean_line[43:45]  # 2 characters (SP/NP)
+                balance_str = clean_line[29:37]
+                transactions_str = clean_line[38:42]
+                plan_type = clean_line[43:45]
 
                 # Validate account number
                 if not account_number.isdigit():
@@ -146,8 +146,6 @@ def read_transactions(file_path):
         lines = file.readlines()
 
     for i, line in enumerate(lines, 1):
-        line = line.strip()
-
         if len(line) < 41:
             log_constraint_error(
                 f"Line {i}: Invalid transaction line length ({len(line)} chars, expected at least 41)",
@@ -159,7 +157,7 @@ def read_transactions(file_path):
         account_name = line[3:23].strip()
         account_number = line[24:29]
         amount = line[30:38]
-        miscellaneous = line[39:]
+        miscellaneous = line[39:].strip()
 
         # Return once we hit the end of transactions marker "00"
         if transaction_code == "00":
@@ -172,8 +170,6 @@ def read_transactions(file_path):
                 fatal=True,
             )
             continue
-        else:
-            transaction_code = int(transaction_code)
 
         if not account_number.isdigit() or len(account_number) != 5:
             log_constraint_error(
