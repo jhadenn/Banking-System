@@ -216,15 +216,15 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Application data
-transactions.txt
-accounts.txt
+frontend/transactions.txt
+frontend/accounts.txt
 
-outputs/*
-!outputs/.gitkeep
+frontend/outputs/*
+!frontend/outputs/.gitkeep
 
 # Temporarily ignored files
-.python-version
-uv.lock
-pyproject.toml
-TODO.md
-sync_expected.sh
+frontend/.python-version
+frontend/uv.lock
+frontend/pyproject.toml
+frontend/TODO.md
+frontend/sync_expected.sh
