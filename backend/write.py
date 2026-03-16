@@ -66,6 +66,9 @@ def write_new_master_accounts(accounts, file_path):
     - TTTT is the total number of transactions
     - _ is a space
     """
+    # The master bank accounts must be sorted by account number
+    accounts = sorted(accounts, key=lambda x: x["account_number"])
+
     with open(file_path, "w") as f:
         for account in accounts:
             line = (
@@ -77,4 +80,4 @@ def write_new_master_accounts(accounts, file_path):
             )
             f.write(line + "\n")
 
-        f.write("00000 END_OF_FILE          A 00000.00 0000\n")
+        f.write("00000 END_OF_FILE          A 00000.00 0000 NP\n")
