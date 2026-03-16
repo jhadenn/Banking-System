@@ -64,6 +64,7 @@ def handle_withdrawal(accounts, account_number, amount):
 
     account["balance"] -= amount
     increment_transaction_count(account)
+    apply_transaction_cost(account)
 
 
 def handle_transfer(accounts, from_account_number, to_account_number, amount):
@@ -89,7 +90,7 @@ def handle_transfer(accounts, from_account_number, to_account_number, amount):
     from_account["balance"] -= amount
     to_account["balance"] += amount
     increment_transaction_count(from_account)
-    increment_transaction_count(to_account)
+    apply_transaction_cost(from_account)
 
 
 def handle_paybill(accounts, account_number, amount):
@@ -105,6 +106,7 @@ def handle_paybill(accounts, account_number, amount):
 
     account["balance"] -= amount
     increment_transaction_count(account)
+    apply_transaction_cost(account)
 
 
 def handle_deposit(accounts, account_number, amount):
@@ -120,6 +122,7 @@ def handle_deposit(accounts, account_number, amount):
 
     account["balance"] += amount
     increment_transaction_count(account)
+    apply_transaction_cost(account)
 
 
 def handle_create(accounts, account_number, account_name, amount):
@@ -148,6 +151,7 @@ def handle_changeplan(accounts, account_number):
 
     account["plan"] = "SP" if account["plan"] == "NP" else "NP"
     increment_transaction_count(account)
+    apply_transaction_cost(account)
 
 
 def handle_delete(accounts, account_number):
@@ -177,6 +181,7 @@ def handle_disable(accounts, account_number):
 
     account["status"] = "D"
     increment_transaction_count(account)
+    apply_transaction_cost(account)
 
 
 def get_account(accounts, account_number) -> dict | None:
@@ -190,3 +195,11 @@ def get_account(accounts, account_number) -> dict | None:
 def increment_transaction_count(account):
     """Increments the total transaction count for an account."""
     account["total_transactions"] += 1
+
+
+def apply_transaction_cost(account):
+    """Deducts $0.05 for SP accounts and $0.10 for NP accounts from the account balance."""
+    if account["plan"] == "SP":
+        account["balance"] -= 0.05
+    else:
+        account["balance"] -= 0.10
