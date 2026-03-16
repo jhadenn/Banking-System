@@ -62,6 +62,15 @@ def handle_withdrawal(accounts, account_number, amount):
         )
         return
 
+    # No bank account should ever have a negative balance
+    if account["balance"] < amount:
+        log_constraint_error(
+            f"Insufficient funds in account '{account_number}' for withdrawal transaction",
+            TransactionCode.WITHDRAWAL.name,
+            fatal=False,
+        )
+        return
+
     account["balance"] -= amount
     increment_transaction_count(account)
     apply_transaction_cost(account)
@@ -87,6 +96,15 @@ def handle_transfer(accounts, from_account_number, to_account_number, amount):
         )
         return
 
+    # No bank account should ever have a negative balance
+    if from_account["balance"] < amount:
+        log_constraint_error(
+            f"Insufficient funds in account '{from_account_number}' for transfer transaction",
+            TransactionCode.TRANSFER.name,
+            fatal=False,
+        )
+        return
+
     from_account["balance"] -= amount
     to_account["balance"] += amount
     increment_transaction_count(from_account)
@@ -99,6 +117,15 @@ def handle_paybill(accounts, account_number, amount):
     if account is None:
         log_constraint_error(
             f"Account number '{account_number}' not found for paybill transaction",
+            TransactionCode.PAYBILL.name,
+            fatal=False,
+        )
+        return
+
+    # No bank account should ever have a negative balance
+    if account["balance"] < amount:
+        log_constraint_error(
+            f"Insufficient funds in account '{account_number}' for paybill transaction",
             TransactionCode.PAYBILL.name,
             fatal=False,
         )
@@ -127,6 +154,15 @@ def handle_deposit(accounts, account_number, amount):
 
 def handle_create(accounts, account_number, account_name, amount):
     """Handles create transactions and adds a new account to the accounts list."""
+    # A newly created account must have a unique account number
+    if get_account(accounts, account_number) is not None:
+        log_constraint_error(
+            f"Account number '{account_number}' already exists for create transaction",
+            TransactionCode.CREATE.name,
+            fatal=False,
+        )
+        return
+
     account = {
         "account_number": account_number,
         "name": account_name,
@@ -199,7 +235,19 @@ def increment_transaction_count(account):
 
 def apply_transaction_cost(account):
     """Deducts $0.05 for SP accounts and $0.10 for NP accounts from the account balance."""
+    SP_COST = 0.05
+    NP_COST = 0.10
+
     if account["plan"] == "SP":
-        account["balance"] -= 0.05
+        cost = SP_COST
     else:
-        account["balance"] -= 0.10
+        cost = NP_COST
+
+    if account["balance"] < cost:
+        log_constraint_error(
+            f"Insufficient funds in account '{account['account_number']}' to apply transaction cost for SP plan",
+            "apply_transaction_cost",
+            fatal=False,
+        )
+        return
+    account["balance"] -= cost
